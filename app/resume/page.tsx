@@ -1,322 +1,343 @@
-import { Card, CardContent } from "@/components/ui/card"
+"use client"
+
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Download, Mail, MapPin, Calendar, GraduationCap, Briefcase, Award, ExternalLink, FileText } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
+import {
+  Download,
+  Mail,
+  MapPin,
+  Github,
+  Linkedin,
+  ExternalLink,
+  Calendar,
+  GraduationCap,
+  Award,
+  Code,
+  Briefcase,
+  User,
+} from "lucide-react"
+import Link from "next/link"
 
 export default function ResumePage() {
+  const skills = {
+    languages: ["Python", "C", "C++", "JavaScript", "Java", "SQL"],
+    web: ["HTML5", "CSS3", "React", "Node.js", "Next.js", "Express", "Tailwind CSS"],
+    tools: ["Git", "GitHub", "Linux", "VS Code", "Docker", "Postman"],
+    ml: ["scikit-learn", "TensorFlow", "Pandas", "NumPy", "Matplotlib", "Jupyter"],
+    databases: ["MySQL", "MongoDB", "PostgreSQL", "SQLite"],
+    cloud: ["AWS", "Vercel", "Netlify", "Firebase"],
+  }
+
+  const projects = [
+    {
+      title: "ML Image Classifier",
+      period: "Oct 2024 - Nov 2024",
+      description: "Developed a deep learning model achieving 94% accuracy on image classification tasks",
+      technologies: ["Python", "TensorFlow", "OpenCV", "Flask"],
+      achievements: [
+        "Implemented CNN architecture with data augmentation techniques",
+        "Created web interface for real-time image predictions",
+        "Optimized model performance through hyperparameter tuning",
+      ],
+    },
+    {
+      title: "Full-Stack E-Commerce Platform",
+      period: "Aug 2024 - Sep 2024",
+      description: "Built complete e-commerce solution with payment integration and admin dashboard",
+      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      achievements: [
+        "Implemented secure user authentication and authorization",
+        "Integrated Stripe payment gateway for secure transactions",
+        "Developed responsive admin panel for inventory management",
+      ],
+    },
+    {
+      title: "Real-Time System Monitor",
+      period: "Jun 2024 - Jul 2024",
+      description: "Created comprehensive system monitoring tool with modern GUI interface",
+      technologies: ["C++", "Qt", "Linux", "SQLite"],
+      achievements: [
+        "Utilized Linux system calls for real-time metrics collection",
+        "Designed intuitive GUI with real-time graphs and alerts",
+        "Implemented process management and performance logging",
+      ],
+    },
+  ]
+
+  const achievements = [
+    "Dean's List for Academic Excellence (2022-2024)",
+    "Winner - College Coding Competition (2023)",
+    "Completed 100+ coding problems on LeetCode",
+    "Active contributor to open-source projects",
+    "Certified in Python Programming (HackerRank)",
+    "Completed Machine Learning Specialization (Coursera)",
+  ]
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-20 px-4">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12 animate-fade-in">
-          <h1 className="text-5xl font-bold text-white mb-6">
-            <span className="text-blue-400">Resume</span>
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            Resume
           </h1>
-          <p className="text-xl text-gray-300 mb-8">Download my resume or view it online</p>
-          <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
+          <p className="text-xl text-muted-foreground mb-8">Download my complete resume or view the details below</p>
+          <Button
+            asChild
+            size="lg"
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+          >
             <a href="/resume.pdf" download="Alok_Sinha_Resume.pdf">
-              <Download className="w-5 h-5 mr-2" />
+              <Download className="mr-2 h-5 w-5" />
               Download PDF Resume
             </a>
           </Button>
         </div>
 
-        {/* Resume Content */}
-        <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm animate-fade-in">
-          <CardContent className="p-8">
-            {/* Header Section */}
-            <div className="text-center mb-8 pb-8 border-b border-gray-700">
-              <h1 className="text-4xl font-bold text-white mb-2">Alok Sinha</h1>
-              <p className="text-xl text-blue-400 mb-4">Aspiring Software Developer</p>
-              <div className="flex flex-wrap justify-center gap-6 text-sm text-gray-300">
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-blue-400" />
-                  <span>sinhalok26@gmail.com</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ExternalLink className="h-4 w-4 text-blue-400" />
-                  <a
-                    href="https://github.com/AlokSinha26"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-blue-400"
-                  >
-                    github.com/AlokSinha26
-                  </a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <ExternalLink className="h-4 w-4 text-blue-400" />
-                  <a
-                    href="https://www.linkedin.com/in/sinhalok7"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-blue-400"
-                  >
-                    linkedin.com/in/sinhalok7
-                  </a>
-                </div>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-blue-400" />
-                  <span>Patiala, Punjab, India</span>
-                </div>
+        {/* Contact Information */}
+        <Card className="mb-8 bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-indigo-900/20 border-purple-500/20">
+          <CardContent className="pt-6">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl font-bold mb-2">Alok Sinha</h2>
+              <p className="text-xl text-purple-400 font-medium">Aspiring Software Developer</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-sm">
+              <div className="flex items-center gap-2 justify-center md:justify-start">
+                <Mail className="h-4 w-4 text-purple-400" />
+                <a href="mailto:sinhalok26@gmail.com" className="hover:text-purple-400 transition-colors">
+                  sinhalok26@gmail.com
+                </a>
+              </div>
+              <div className="flex items-center gap-2 justify-center md:justify-start">
+                <MapPin className="h-4 w-4 text-blue-400" />
+                <span>Patiala, Punjab, India</span>
+              </div>
+              <div className="flex items-center gap-2 justify-center md:justify-start">
+                <Github className="h-4 w-4 text-indigo-400" />
+                <a
+                  href="https://github.com/AlokSinha26"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-indigo-400 transition-colors"
+                >
+                  AlokSinha26
+                </a>
+              </div>
+              <div className="flex items-center gap-2 justify-center md:justify-start">
+                <Linkedin className="h-4 w-4 text-cyan-400" />
+                <a
+                  href="https://www.linkedin.com/in/sinhalok7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-cyan-400 transition-colors"
+                >
+                  sinhalok7
+                </a>
               </div>
             </div>
-
-            {/* Professional Summary */}
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                <FileText className="h-6 w-6 text-blue-400" />
-                Professional Summary
-              </h2>
-              <p className="text-gray-300 leading-relaxed">
-                Passionate Computer Engineering student with strong foundation in programming, data structures, and
-                algorithms. Experienced in Machine Learning, Web Development, and System Programming. Enthusiastic
-                fresher seeking opportunities to contribute to innovative projects and grow as a software developer.
-                Building things with code & curiosity.
-              </p>
-            </section>
-
-            {/* Education */}
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                <GraduationCap className="h-6 w-6 text-blue-400" />
-                Education
-              </h2>
-              <div className="space-y-4">
-                <div className="border-l-2 border-blue-400 pl-4">
-                  <h3 className="text-lg font-semibold text-white">Bachelor of Engineering - Computer Engineering</h3>
-                  <p className="text-blue-400 font-medium">Thapar Institute of Engineering & Technology</p>
-                  <div className="flex items-center gap-4 text-sm text-gray-400 mt-1">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      July 2022 - June 2026
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-4 w-4" />
-                      Patiala, Punjab
-                    </span>
-                  </div>
-                  <div className="mt-3">
-                    <p className="text-sm text-gray-300 mb-2">Relevant Coursework:</p>
-                    <div className="flex flex-wrap gap-2">
-                      <Badge variant="outline" className="border-blue-400 text-blue-300 text-xs">
-                        Data Structures & Algorithms
-                      </Badge>
-                      <Badge variant="outline" className="border-blue-400 text-blue-300 text-xs">
-                        Operating Systems
-                      </Badge>
-                      <Badge variant="outline" className="border-blue-400 text-blue-300 text-xs">
-                        Database Management
-                      </Badge>
-                      <Badge variant="outline" className="border-blue-400 text-blue-300 text-xs">
-                        Computer Networks
-                      </Badge>
-                      <Badge variant="outline" className="border-blue-400 text-blue-300 text-xs">
-                        Software Engineering
-                      </Badge>
-                      <Badge variant="outline" className="border-blue-400 text-blue-300 text-xs">
-                        Machine Learning
-                      </Badge>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Technical Skills */}
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-white mb-4">Technical Skills</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <h3 className="font-semibold text-white mb-2">Programming Languages</h3>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      Python
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      C
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      C++
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      JavaScript
-                    </Badge>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white mb-2">Web Technologies</h3>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      HTML
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      CSS
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      React
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      Node.js
-                    </Badge>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white mb-2">Tools & Technologies</h3>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      Git
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      GitHub
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      Linux
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      VS Code
-                    </Badge>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-semibold text-white mb-2">ML/Data Science</h3>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      scikit-learn
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      TensorFlow
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      Pandas
-                    </Badge>
-                    <Badge variant="outline" className="border-blue-400 text-blue-300">
-                      NumPy
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Projects */}
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                <Briefcase className="h-6 w-6 text-blue-400" />
-                Key Projects
-              </h2>
-              <div className="space-y-6">
-                <div className="border-l-2 border-blue-400 pl-4">
-                  <h3 className="text-lg font-semibold text-white">Machine Learning Image Classifier</h3>
-                  <p className="text-sm text-gray-400 mb-2">Nov 2024</p>
-                  <p className="text-gray-300 mb-2">
-                    Developed an advanced deep learning model for multi-class image classification achieving 94%
-                    accuracy using TensorFlow and Keras.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      Python
-                    </Badge>
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      TensorFlow
-                    </Badge>
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      OpenCV
-                    </Badge>
-                  </div>
-                </div>
-
-                <div className="border-l-2 border-blue-400 pl-4">
-                  <h3 className="text-lg font-semibold text-white">Full-Stack E-Commerce Platform</h3>
-                  <p className="text-sm text-gray-400 mb-2">Oct 2024</p>
-                  <p className="text-gray-300 mb-2">
-                    Built a complete e-commerce solution with React frontend, Node.js backend, payment integration, and
-                    admin dashboard.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      React
-                    </Badge>
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      Node.js
-                    </Badge>
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      MongoDB
-                    </Badge>
-                  </div>
-                </div>
-
-                <div className="border-l-2 border-blue-400 pl-4">
-                  <h3 className="text-lg font-semibold text-white">Real-Time System Monitor</h3>
-                  <p className="text-sm text-gray-400 mb-2">Sep 2024</p>
-                  <p className="text-gray-300 mb-2">
-                    Created a high-performance system monitoring application in C++ with Qt GUI for real-time
-                    performance tracking.
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      C++
-                    </Badge>
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      Qt
-                    </Badge>
-                    <Badge variant="secondary" className="bg-blue-600/20 text-blue-300 text-xs">
-                      Linux
-                    </Badge>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Achievements */}
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
-                <Award className="h-6 w-6 text-blue-400" />
-                Achievements & Certifications
-              </h2>
-              <div className="space-y-3">
-                <div className="flex items-start gap-2">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-300">
-                    Completed multiple online courses in Machine Learning and Data Science
-                  </span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-300">Active contributor to open-source projects on GitHub</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-300">Participated in coding competitions and hackathons</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                  <span className="text-gray-300">
-                    Strong problem-solving skills with focus on algorithmic thinking
-                  </span>
-                </div>
-              </div>
-            </section>
-
-            {/* Interests */}
-            <section>
-              <h2 className="text-2xl font-bold text-white mb-4">Interests</h2>
-              <p className="text-gray-300">
-                Machine Learning, Artificial Intelligence, Web Development, Open Source Contribution, System
-                Programming, Competitive Programming, Technology Innovation, Software Architecture
-              </p>
-            </section>
           </CardContent>
         </Card>
 
-        {/* Download CTA */}
-        <div className="text-center mt-8">
-          <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700">
-            <a href="/resume.pdf" download="Alok_Sinha_Resume.pdf">
-              <Download className="w-5 h-5 mr-2" />
-              Download PDF Resume
-            </a>
-          </Button>
-        </div>
+        {/* Professional Summary */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <User className="h-5 w-5 text-purple-400" />
+              Professional Summary
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground leading-relaxed">
+              Enthusiastic and dedicated Computer Engineering student with a strong foundation in software development,
+              machine learning, and system programming. Passionate about creating innovative solutions and eager to
+              contribute to cutting-edge projects. Proven ability to work with modern technologies and frameworks, with
+              a keen interest in continuous learning and professional growth. Seeking opportunities to apply technical
+              skills in a dynamic environment while contributing to meaningful projects.
+            </p>
+          </CardContent>
+        </Card>
+
+        {/* Education */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <GraduationCap className="h-5 w-5 text-blue-400" />
+              Education
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <div className="border-l-4 border-purple-500 pl-6">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 className="text-lg font-semibold">Bachelor of Engineering - Computer Engineering</h3>
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                    <Calendar className="h-4 w-4" />
+                    <span>2021 - 2025 (Expected)</span>
+                  </div>
+                </div>
+                <p className="text-purple-400 font-medium mb-2">
+                  Thapar Institute of Engineering and Technology, Patiala
+                </p>
+                <p className="text-sm text-muted-foreground mb-3">
+                  <strong>Relevant Coursework:</strong> Data Structures & Algorithms, Operating Systems, Database
+                  Management Systems, Machine Learning, Computer Networks, Software Engineering, Object-Oriented
+                  Programming, System Programming
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline" className="text-xs">
+                    Dean's List
+                  </Badge>
+                  <Badge variant="outline" className="text-xs">
+                    Academic Excellence
+                  </Badge>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Technical Skills */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Code className="h-5 w-5 text-indigo-400" />
+              Technical Skills
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              <div>
+                <h4 className="font-semibold mb-3 text-purple-400">Programming Languages</h4>
+                <div className="flex flex-wrap gap-2">
+                  {skills.languages.map((skill) => (
+                    <Badge key={skill} variant="secondary" className="text-xs">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <Separator />
+              <div>
+                <h4 className="font-semibold mb-3 text-blue-400">Web Development</h4>
+                <div className="flex flex-wrap gap-2">
+                  {skills.web.map((skill) => (
+                    <Badge key={skill} variant="secondary" className="text-xs">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <Separator />
+              <div>
+                <h4 className="font-semibold mb-3 text-indigo-400">Tools & Technologies</h4>
+                <div className="flex flex-wrap gap-2">
+                  {skills.tools.map((skill) => (
+                    <Badge key={skill} variant="secondary" className="text-xs">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <Separator />
+              <div>
+                <h4 className="font-semibold mb-3 text-cyan-400">Machine Learning & Data Science</h4>
+                <div className="flex flex-wrap gap-2">
+                  {skills.ml.map((skill) => (
+                    <Badge key={skill} variant="secondary" className="text-xs">
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Key Projects */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Briefcase className="h-5 w-5 text-cyan-400" />
+              Key Projects
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-8">
+              {projects.map((project, index) => (
+                <div key={project.title}>
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                    <h3 className="text-lg font-semibold text-purple-400">{project.title}</h3>
+                    <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      <span>{project.period}</span>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground mb-3">{project.description}</p>
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {project.technologies.map((tech) => (
+                      <Badge key={tech} variant="outline" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                    {project.achievements.map((achievement, achievementIndex) => (
+                      <li key={achievementIndex}>{achievement}</li>
+                    ))}
+                  </ul>
+                  {index < projects.length - 1 && <Separator className="mt-6" />}
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Achievements & Certifications */}
+        <Card className="mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Award className="h-5 w-5 text-yellow-400" />
+              Achievements & Certifications
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {achievements.map((achievement, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-purple-400 mt-2 flex-shrink-0" />
+                  <p className="text-sm text-muted-foreground">{achievement}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Call to Action */}
+        <Card className="bg-gradient-to-r from-purple-900/20 via-blue-900/20 to-indigo-900/20 border-purple-500/20">
+          <CardContent className="pt-6 text-center">
+            <h3 className="text-2xl font-bold mb-4">Let's Connect!</h3>
+            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
+              I'm actively seeking opportunities to contribute to innovative projects and grow as a developer. Feel free
+              to reach out to discuss potential collaborations or opportunities.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button asChild size="lg">
+                <Link href="/contact">
+                  <Mail className="mr-2 h-5 w-5" />
+                  Contact Me
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/projects">
+                  <ExternalLink className="mr-2 h-5 w-5" />
+                  View Projects
+                </Link>
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )

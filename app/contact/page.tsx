@@ -5,251 +5,241 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, Github, Linkedin, MapPin, Phone, Send, MessageCircle } from "lucide-react"
-import { useState } from "react"
+import { Mail, MapPin, Github, Linkedin, Send, Clock, MessageCircle } from "lucide-react"
 import { submitContactForm } from "@/app/actions/contact"
-import { useToast } from "@/hooks/use-toast"
+import { useActionState } from "react"
 
 export default function ContactPage() {
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const { toast } = useToast()
+  const [state, formAction, isPending] = useActionState(submitContactForm, null)
 
-  async function handleSubmit(formData: FormData) {
-    setIsSubmitting(true)
-    try {
-      const result = await submitContactForm(formData)
-      if (result.success) {
-        toast({
-          title: "Message sent successfully!",
-          description: "Thank you for reaching out. I'll get back to you soon.",
-        })
-        // Reset form
-        const form = document.getElementById("contact-form") as HTMLFormElement
-        form?.reset()
-      } else {
-        toast({
-          title: "Error sending message",
-          description: result.error || "Please try again later.",
-          variant: "destructive",
-        })
-      }
-    } catch (error) {
-      toast({
-        title: "Error sending message",
-        description: "Please try again later.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+  const contactInfo = [
+    {
+      icon: Mail,
+      label: "Email",
+      value: "sinhalok26@gmail.com",
+      href: "mailto:sinhalok26@gmail.com",
+      color: "text-purple-400",
+    },
+    {
+      icon: Github,
+      label: "GitHub",
+      value: "AlokSinha26",
+      href: "https://github.com/AlokSinha26",
+      color: "text-blue-400",
+    },
+    {
+      icon: Linkedin,
+      label: "LinkedIn",
+      value: "sinhalok7",
+      href: "https://www.linkedin.com/in/sinhalok7",
+      color: "text-indigo-400",
+    },
+    {
+      icon: MapPin,
+      label: "Location",
+      value: "Patiala, Punjab, India",
+      href: null,
+      color: "text-cyan-400",
+    },
+  ]
+
+  const faqs = [
+    {
+      question: "What type of opportunities are you looking for?",
+      answer:
+        "I'm open to full-time positions, internships, and freelance projects in software development, particularly in web development, machine learning, and system programming.",
+    },
+    {
+      question: "Are you available for remote work?",
+      answer:
+        "Yes, I'm open to both remote and on-site opportunities. I'm comfortable working in distributed teams and have experience with remote collaboration tools.",
+    },
+    {
+      question: "What's your preferred tech stack?",
+      answer:
+        "I enjoy working with Python for ML/backend, React/Next.js for frontend, and C/C++ for system programming. However, I'm always eager to learn new technologies based on project requirements.",
+    },
+    {
+      question: "How quickly can you start?",
+      answer:
+        "I'm currently completing my degree and will be available for full-time positions from May 2025. For part-time or project-based work, I can start immediately.",
+    },
+  ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 py-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-20 px-4">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h1 className="text-5xl font-bold text-white mb-6">
-            Get In <span className="text-blue-400">Touch</span>
+        <div className="text-center mb-16">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            Get In Touch
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            I'm always interested in new opportunities, collaborations, and exciting projects. Let's discuss how we can
-            work together!
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            I'm always excited to discuss new opportunities, collaborate on interesting projects, or simply chat about
+            technology. Let's connect!
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
-          <div className="space-y-8 animate-fade-in">
-            <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <MessageCircle className="h-6 w-6 text-blue-400" />
-                  Let's Connect
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <p className="text-gray-300 leading-relaxed">
-                  I'm currently seeking opportunities as a software developer and would love to hear about potential
-                  roles, freelance projects, or collaboration opportunities. Feel free to reach out!
-                </p>
-
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-700/50 hover:bg-gray-700/70 transition-colors">
-                    <div className="p-2 bg-blue-600 rounded-lg">
-                      <Mail className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">Email</p>
-                      <a href="mailto:sinhalok26@gmail.com" className="text-blue-400 hover:text-blue-300">
-                        sinhalok26@gmail.com
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-700/50 hover:bg-gray-700/70 transition-colors">
-                    <div className="p-2 bg-gray-600 rounded-lg">
-                      <Github className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">GitHub</p>
-                      <a
-                        href="https://github.com/AlokSinha26"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-400 hover:text-blue-300"
-                      >
-                        github.com/AlokSinha26
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-700/50 hover:bg-gray-700/70 transition-colors">
-                    <div className="p-2 bg-blue-700 rounded-lg">
-                      <Linkedin className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">LinkedIn</p>
-                      <a
-                        href="https://www.linkedin.com/in/sinhalok7"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-400 hover:text-blue-300"
-                      >
-                        linkedin.com/in/sinhalok7
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 p-4 rounded-lg bg-gray-700/50">
-                    <div className="p-2 bg-green-600 rounded-lg">
-                      <MapPin className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-white font-medium">Location</p>
-                      <p className="text-gray-300">Patiala, Punjab, India</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Links */}
-            <Card className="bg-gradient-to-r from-blue-900/50 to-purple-900/50 border-blue-500/50 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold text-white mb-4">Quick Actions</h3>
-                <div className="space-y-3">
-                  <Button asChild className="w-full justify-start bg-blue-600 hover:bg-blue-700">
-                    <a href="mailto:sinhalok26@gmail.com">
-                      <Mail className="w-4 h-4 mr-2" />
-                      Send Direct Email
-                    </a>
-                  </Button>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full justify-start border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white bg-transparent"
-                  >
-                    <a href="/resume" target="_blank" rel="noreferrer">
-                      <Phone className="w-4 h-4 mr-2" />
-                      View Resume
-                    </a>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Form */}
-          <div className="animate-fade-in">
-            <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center gap-2">
-                  <Send className="h-6 w-6 text-blue-400" />
-                  Send Message
+          <div className="lg:col-span-2">
+            <Card className="p-8">
+              <CardHeader className="p-0 mb-6">
+                <CardTitle className="flex items-center gap-2 text-2xl">
+                  <MessageCircle className="h-6 w-6 text-purple-400" />
+                  Send Me a Message
                 </CardTitle>
+                <p className="text-muted-foreground">
+                  Fill out the form below and I'll get back to you as soon as possible.
+                </p>
               </CardHeader>
-              <CardContent>
-                <form id="contact-form" action={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+              <CardContent className="p-0">
+                <form action={formAction} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-white">
-                        Name *
-                      </Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        required
-                        className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-400"
-                        placeholder="Your full name"
-                      />
+                      <Label htmlFor="name">Name *</Label>
+                      <Input id="name" name="name" placeholder="Your full name" required className="bg-background" />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email" className="text-white">
-                        Email *
-                      </Label>
+                      <Label htmlFor="email">Email *</Label>
                       <Input
                         id="email"
                         name="email"
                         type="email"
-                        required
-                        className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-400"
                         placeholder="your.email@example.com"
+                        required
+                        className="bg-background"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="subject" className="text-white">
-                      Subject *
-                    </Label>
+                    <Label htmlFor="subject">Subject *</Label>
                     <Input
                       id="subject"
                       name="subject"
-                      required
-                      className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-400"
                       placeholder="What's this about?"
+                      required
+                      className="bg-background"
                     />
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message" className="text-white">
-                      Message *
-                    </Label>
+                    <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
                       name="message"
-                      required
+                      placeholder="Tell me about your project, opportunity, or just say hello..."
                       rows={6}
-                      className="bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-blue-400 resize-none"
-                      placeholder="Tell me about your project, opportunity, or just say hello!"
+                      required
+                      className="bg-background resize-none"
                     />
                   </div>
 
+                  {state?.error && (
+                    <div className="p-4 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                      {state.error}
+                    </div>
+                  )}
+
+                  {state?.success && (
+                    <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-400 text-sm">
+                      {state.message}
+                    </div>
+                  )}
+
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50"
+                    size="lg"
+                    className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                    disabled={isPending}
                   >
-                    {isSubmitting ? (
+                    {isPending ? (
                       <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
                         Sending...
                       </>
                     ) : (
                       <>
-                        <Send className="w-4 h-4 mr-2" />
+                        <Send className="mr-2 h-4 w-4" />
                         Send Message
                       </>
                     )}
                   </Button>
                 </form>
+              </CardContent>
+            </Card>
+          </div>
 
-                <div className="mt-6 p-4 bg-blue-900/20 rounded-lg border border-blue-500/30">
-                  <p className="text-sm text-blue-300">
-                    <strong>Response Time:</strong> I typically respond within 24-48 hours. For urgent matters, feel
-                    free to reach out directly via email.
-                  </p>
+          {/* Contact Info & FAQ */}
+          <div className="space-y-8">
+            {/* Contact Information */}
+            <Card className="p-6 bg-gradient-to-br from-purple-500/10 to-blue-500/10 border-purple-500/20">
+              <CardHeader className="p-0 mb-6">
+                <CardTitle className="text-xl">Contact Information</CardTitle>
+              </CardHeader>
+              <CardContent className="p-0">
+                <div className="space-y-4">
+                  {contactInfo.map((info) => (
+                    <div key={info.label} className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-background/50">
+                        <info.icon className={`h-4 w-4 ${info.color}`} />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">{info.label}</p>
+                        {info.href ? (
+                          <a
+                            href={info.href}
+                            target={info.href.startsWith("http") ? "_blank" : undefined}
+                            rel={info.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                            className={`text-sm hover:${info.color} transition-colors`}
+                          >
+                            {info.value}
+                          </a>
+                        ) : (
+                          <p className="text-sm text-muted-foreground">{info.value}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Response Time */}
+            <Card className="p-6">
+              <CardContent className="p-0">
+                <div className="flex items-center gap-3 mb-4">
+                  <Clock className="h-5 w-5 text-blue-400" />
+                  <h3 className="font-semibold">Response Time</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  I typically respond to messages within 24 hours. For urgent matters, feel free to reach out directly
+                  via email.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* Social Links */}
+            <Card className="p-6">
+              <CardContent className="p-0">
+                <h3 className="font-semibold mb-4">Connect on Social Media</h3>
+                <div className="flex gap-3">
+                  <Button variant="outline" size="icon" asChild>
+                    <a href="https://github.com/AlokSinha26" target="_blank" rel="noopener noreferrer">
+                      <Github className="h-4 w-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <a href="https://www.linkedin.com/in/sinhalok7" target="_blank" rel="noopener noreferrer">
+                      <Linkedin className="h-4 w-4" />
+                    </a>
+                  </Button>
+                  <Button variant="outline" size="icon" asChild>
+                    <a href="mailto:sinhalok26@gmail.com">
+                      <Mail className="h-4 w-4" />
+                    </a>
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -258,49 +248,16 @@ export default function ContactPage() {
 
         {/* FAQ Section */}
         <div className="mt-20">
-          <h2 className="text-3xl font-bold text-white text-center mb-12">Frequently Asked Questions</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-white mb-2">
-                  What type of opportunities are you looking for?
-                </h3>
-                <p className="text-gray-300 text-sm">
-                  I'm open to full-time software developer positions, internships, freelance projects, and collaboration
-                  opportunities in web development, machine learning, and system programming.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-white mb-2">Are you available for remote work?</h3>
-                <p className="text-gray-300 text-sm">
-                  Yes, I'm open to both remote and on-site opportunities. I'm comfortable working with distributed teams
-                  and have experience with remote collaboration tools.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-white mb-2">What's your preferred tech stack?</h3>
-                <p className="text-gray-300 text-sm">
-                  I enjoy working with Python, JavaScript/React, and C++. I'm also experienced with machine learning
-                  frameworks like TensorFlow and web technologies like Node.js.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-white mb-2">Do you take on freelance projects?</h3>
-                <p className="text-gray-300 text-sm">
-                  Yes, I'm available for freelance projects, especially those involving web development, data analysis,
-                  or machine learning. Feel free to discuss your project requirements.
-                </p>
-              </CardContent>
-            </Card>
+          <h2 className="text-3xl font-bold text-center mb-12">Frequently Asked Questions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {faqs.map((faq, index) => (
+              <Card key={index} className="p-6 hover:shadow-lg transition-all duration-300">
+                <CardContent className="p-0">
+                  <h3 className="font-semibold mb-3 text-purple-400">{faq.question}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{faq.answer}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>
