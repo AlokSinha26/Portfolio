@@ -2,8 +2,9 @@
 
 import type React from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { useState, useEffect, useRef, lazy } from "react"
-import { Mail, Linkedin, Github, Menu, X, Send, ArrowRight, Download } from "lucide-react"
+import { Mail, Linkedin, Github, Send, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -228,106 +229,38 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900 text-gray-900 dark:text-white">
-      {/* Sticky Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Alok Sinha
-            </div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`transition-all duration-300 ${
-                    activeSection === item.id
-                      ? "text-blue-400 border-b-2 border-blue-400"
-                      : "text-gray-300 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-
-          {/* Mobile Navigation */}
-          {isMenuOpen && (
-            <div className="md:hidden py-4 border-t border-gray-800 animate-fade-in">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`block w-full text-left py-2 transition-colors ${
-                    activeSection === item.id ? "text-blue-400" : "text-gray-300 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      </nav>
-
       {/* Hero Section */}
       <section id="hero" className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-gray-800" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
-            <div className="space-y-8">
-              <div className="space-y-4">
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
-                  Hi, I'm{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    Alok Sinha
-                  </span>
-                </h1>
-                <div className="h-16 flex items-center">
-                  <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300">
-                    {typingText}
-                    <span className="animate-pulse">|</span>
-                  </p>
-                </div>
-                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
-                  Computer Engineering student at Thapar Institute, passionate about Data Structures & Algorithms,
-                  Machine Learning, and Web Development. Ready to solve real-world problems with innovative technology
-                  solutions.
-                </p>
-              </div>
-
-              {/* CTA Buttons */}
+            <div className="animate-fade-in">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">
+                Hi, I'm Alok Sinha
+              </h1>
+              <h2 className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-6">
+                {typingText}
+                <span className="animate-pulse">|</span>
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mb-8 leading-relaxed">
+                Computer Engineering student at Thapar Institute, passionate about Data Structures & Algorithms, Machine
+                Learning, and Web Development. Ready to solve real-world problems with innovative technology solutions.
+              </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-                >
-                  
-                </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  size="lg"
-                  className="border-gray-300 dark:border-gray-600 bg-transparent"
-                >
-                  <Link href="/resume">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download Resume
+                <Button asChild size="lg" className="group">
+                  <Link href="/projects">
+                    View My Work
+                    <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/contact">Get In Touch</Link>
                 </Button>
               </div>
 
               {/* Quick Links */}
-              <div className="flex space-x-6">
+              <div className="flex space-x-6 mt-8">
                 <a
                   href="mailto:sinhalok26@gmail.com"
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
@@ -354,13 +287,16 @@ export default function Portfolio() {
             </div>
 
             {/* Profile Image */}
-            <div className="relative">
+            <div className="relative animate-fade-in">
               <div className="relative w-80 h-80 mx-auto">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/upscalemedia-transformed-54mA5BOJaTgJL51BCII9oc1FOdI4kq.jpeg"
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-3xl opacity-20 animate-pulse" />
+                <Image
+                  src="/alok-photo.jpg"
                   alt="Alok Sinha"
-                  className="relative w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-800 shadow-2xl"
+                  width={320}
+                  height={320}
+                  className="relative rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-2xl"
+                  priority
                 />
               </div>
             </div>
@@ -373,20 +309,20 @@ export default function Portfolio() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">5+</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">6+</div>
               <div className="text-gray-600 dark:text-gray-400">Projects</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">3+</div>
-              <div className="text-gray-600 dark:text-gray-400">Languages</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">5+</div>
+              <div className="text-gray-600 dark:text-gray-400">Technologies</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">2026</div>
-              <div className="text-gray-600 dark:text-gray-400">Graduate</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">2+</div>
+              <div className="text-gray-600 dark:text-gray-400">Years Learning</div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">100%</div>
-              <div className="text-gray-600 dark:text-gray-400">Dedicated</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">∞</div>
+              <div className="text-gray-600 dark:text-gray-300">Curiosity</div>
             </div>
           </div>
         </div>
@@ -398,7 +334,7 @@ export default function Portfolio() {
           <h2 className="text-4xl font-bold mb-8 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
             About Me
           </h2>
-          <p className="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-3xl mx-auto">
             Hi, I'm Alok Sinha — a passionate learner exploring Machine Learning, Web Development, C/C++, and Operating
             Systems. I love building innovative solutions and constantly expanding my knowledge in cutting-edge
             technologies.
@@ -471,10 +407,10 @@ export default function Portfolio() {
               {skills.map((skill, index) => (
                 <div
                   key={index}
-                  className="bg-gray-800/50 border border-gray-700 rounded-lg p-4 text-center hover:border-blue-500 hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
+                  className="bg-white/80 dark:bg-gray-800/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4 text-center hover:border-blue-500 hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
-                  <span className="text-white font-medium">{skill}</span>
+                  <span className="text-gray-900 dark:text-white font-medium">{skill}</span>
                 </div>
               ))}
             </div>
@@ -499,8 +435,8 @@ export default function Portfolio() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Info */}
               <div>
-                <h3 className="text-2xl font-semibold mb-6 text-white">Let's Connect</h3>
-                <p className="text-gray-300 mb-8">
+                <h3 className="text-2xl font-semibold mb-6 text-gray-900 dark:text-white">Let's Connect</h3>
+                <p className="text-gray-600 dark:text-gray-300 mb-8">
                   I'm always open to discussing new opportunities, interesting projects, or just having a chat about
                   technology.
                 </p>
@@ -508,12 +444,15 @@ export default function Portfolio() {
                 <div className="space-y-4">
                   <a
                     href="mailto:sinhalok26@gmail.com"
-                    className="flex items-center gap-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 group"
+                    className="flex items-center gap-4 p-4 bg-white/80 dark:bg-gray-800/50 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 group"
                   >
-                    <Mail size={24} className="text-blue-400 group-hover:text-blue-300" />
+                    <Mail
+                      size={24}
+                      className="text-blue-600 dark:text-blue-400 group-hover:text-blue-500 dark:group-hover:text-blue-300"
+                    />
                     <div>
-                      <div className="text-white font-medium">Email</div>
-                      <div className="text-gray-400">sinhalok26@gmail.com</div>
+                      <div className="text-gray-900 dark:text-white font-medium">Email</div>
+                      <div className="text-gray-600 dark:text-gray-400">sinhalok26@gmail.com</div>
                     </div>
                   </a>
 
@@ -521,12 +460,15 @@ export default function Portfolio() {
                     href="https://www.linkedin.com/in/sinhalok7"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 group"
+                    className="flex items-center gap-4 p-4 bg-white/80 dark:bg-gray-800/50 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 group"
                   >
-                    <Linkedin size={24} className="text-blue-400 group-hover:text-blue-300" />
+                    <Linkedin
+                      size={24}
+                      className="text-blue-600 dark:text-blue-400 group-hover:text-blue-500 dark:group-hover:text-blue-300"
+                    />
                     <div>
-                      <div className="text-white font-medium">LinkedIn</div>
-                      <div className="text-gray-400">linkedin.com/in/sinhalok7</div>
+                      <div className="text-gray-900 dark:text-white font-medium">LinkedIn</div>
+                      <div className="text-gray-600 dark:text-gray-400">linkedin.com/in/sinhalok7</div>
                     </div>
                   </a>
 
@@ -534,22 +476,25 @@ export default function Portfolio() {
                     href="https://github.com/AlokSinha26"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 p-4 bg-gray-800/50 rounded-lg hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 group"
+                    className="flex items-center gap-4 p-4 bg-white/80 dark:bg-gray-800/50 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-300 transform hover:scale-105 group"
                   >
-                    <Github size={24} className="text-blue-400 group-hover:text-blue-300" />
+                    <Github
+                      size={24}
+                      className="text-blue-600 dark:text-blue-400 group-hover:text-blue-500 dark:group-hover:text-blue-300"
+                    />
                     <div>
-                      <div className="text-white font-medium">GitHub</div>
-                      <div className="text-gray-400">github.com/AlokSinha26</div>
+                      <div className="text-gray-900 dark:text-white font-medium">GitHub</div>
+                      <div className="text-gray-600 dark:text-gray-400">github.com/AlokSinha26</div>
                     </div>
                   </a>
                 </div>
               </div>
 
               {/* Contact Form */}
-              <Card className="bg-gray-800/50 border-gray-700">
+              <Card className="bg-white/80 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-white">Send a Message</CardTitle>
-                  <CardDescription className="text-gray-400">
+                  <CardTitle className="text-gray-900 dark:text-white">Send a Message</CardTitle>
+                  <CardDescription className="text-gray-600 dark:text-gray-400">
                     Fill out the form below and I'll get back to you as soon as possible.
                   </CardDescription>
                 </CardHeader>
@@ -560,7 +505,7 @@ export default function Portfolio() {
                         placeholder="Your Name"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-400"
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-400"
                         required
                       />
                     </div>
@@ -570,7 +515,7 @@ export default function Portfolio() {
                         placeholder="Your Email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-400"
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-400"
                         required
                       />
                     </div>
@@ -579,7 +524,7 @@ export default function Portfolio() {
                         placeholder="Your Message"
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-400 min-h-[120px]"
+                        className="bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-blue-500 dark:focus:border-blue-400 min-h-[120px]"
                         required
                       />
                     </div>
@@ -612,7 +557,7 @@ export default function Portfolio() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-gray-400 border-t border-gray-800">
+      <footer className="py-8 text-center text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-800">
         <p>&copy; 2024 Alok Sinha. All rights reserved. Built with React & Tailwind CSS.</p>
       </footer>
     </div>
