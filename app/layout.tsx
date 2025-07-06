@@ -2,32 +2,36 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import { Navbar } from "./components/Navbar"
-import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Alok Sinha - Aspiring Software Developer",
   description:
-    "Computer Engineering student passionate about DSA, Web Development, and Machine Learning. Explore my projects and skills.",
+    "Personal portfolio of Alok Sinha, showcasing expertise in Machine Learning, Web Development, C/C++, and Operating Systems. Passionate about building innovative solutions.",
   keywords: [
     "Alok Sinha",
     "Software Developer",
-    "Computer Engineering",
     "Machine Learning",
     "Web Development",
     "C++",
-    "Python",
+    "Operating Systems",
     "Portfolio",
+    "React",
+    "Python",
   ],
   authors: [{ name: "Alok Sinha", url: "https://github.com/AlokSinha26" }],
   creator: "Alok Sinha",
   openGraph: {
     title: "Alok Sinha - Aspiring Software Developer",
-    description: "Computer Engineering student passionate about DSA, Web Development, and Machine Learning",
+    description: "Personal portfolio showcasing projects in ML, Web Dev, C/C++, and OS",
     type: "website",
     locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Alok Sinha - Aspiring Software Developer",
+    description: "Personal portfolio showcasing projects in ML, Web Dev, C/C++, and OS",
   },
   robots: {
     index: true,
@@ -42,15 +46,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased min-h-screen transition-colors duration-300`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange={false}>
-          <div className="bg-white dark:bg-gray-900 text-gray-900 dark:text-white min-h-screen">
-            <Navbar />
-            <main className="pt-16">{children}</main>
-          </div>
-        </ThemeProvider>
-      </body>
+    <html lang="en" className="dark">
+      <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
   )
 }
