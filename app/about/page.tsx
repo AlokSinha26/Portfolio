@@ -1,9 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Calendar, GraduationCap, User } from "lucide-react"
-import Image from "next/image"
+import { GraduationCap, MapPin, Calendar, User } from "lucide-react"
 
-export default function AboutPage() {
+export default function About() {
   const education = [
     {
       institution: "Thapar Institute of Engineering & Technology",
@@ -39,10 +38,7 @@ export default function AboutPage() {
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            About{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              Alok Sinha
-            </span>
+            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Me</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             Get to know more about my journey, education, and what drives my passion for technology
@@ -55,12 +51,10 @@ export default function AboutPage() {
             <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700">
               <CardContent className="p-6">
                 <div className="text-center">
-                  <Image
-                    src="/alok-photo.jpg"
+                  <img
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/upscalemedia-transformed-54mA5BOJaTgJL51BCII9oc1FOdI4kq.jpeg"
                     alt="Alok Sinha"
-                    width={128}
-                    height={128}
-                    className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-200 dark:border-blue-800 object-cover"
+                    className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-blue-200 dark:border-blue-800"
                   />
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Alok Sinha</h2>
                   <p className="text-blue-600 dark:text-blue-400 mb-4">Aspiring Software Developer</p>

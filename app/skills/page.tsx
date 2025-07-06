@@ -1,117 +1,97 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
-import { Code, Globe, Database, Cpu, Brain, Wrench } from "lucide-react"
+import { Code, Database, Globe, Wrench } from "lucide-react"
 
-export default function SkillsPage() {
+export default function Skills() {
   const skillCategories = [
     {
       title: "Programming Languages",
-      icon: Code,
+      icon: <Code className="h-6 w-6" />,
       skills: [
-        { name: "Python", level: 85, description: "Data Science, ML, Web Development" },
-        { name: "C/C++", level: 80, description: "System Programming, DSA" },
-        { name: "JavaScript", level: 75, description: "Web Development, Node.js" },
-        { name: "HTML/CSS", level: 90, description: "Frontend Development" },
+        { name: "C++", level: 85 },
+        { name: "C", level: 80 },
+        { name: "Kotlin", level: 70 },
+        { name: "Python", level: 75 },
       ],
     },
     {
       title: "Web Development",
-      icon: Globe,
+      icon: <Globe className="h-6 w-6" />,
       skills: [
-        { name: "React", level: 80, description: "Frontend Framework" },
-        { name: "Node.js", level: 70, description: "Backend Development" },
-        { name: "Express.js", level: 65, description: "Web Framework" },
-        { name: "Tailwind CSS", level: 85, description: "Styling Framework" },
+        { name: "HTML", level: 90 },
+        { name: "CSS", level: 85 },
+        { name: "JavaScript", level: 80 },
+        { name: "React", level: 70 },
       ],
     },
     {
-      title: "Machine Learning & Data Science",
-      icon: Brain,
+      title: "Database & Backend",
+      icon: <Database className="h-6 w-6" />,
       skills: [
-        { name: "TensorFlow", level: 70, description: "Deep Learning Framework" },
-        { name: "scikit-learn", level: 75, description: "Machine Learning Library" },
-        { name: "Pandas", level: 80, description: "Data Manipulation" },
-        { name: "NumPy", level: 85, description: "Numerical Computing" },
-      ],
-    },
-    {
-      title: "Databases",
-      icon: Database,
-      skills: [
-        { name: "MongoDB", level: 70, description: "NoSQL Database" },
-        { name: "MySQL", level: 65, description: "Relational Database" },
-        { name: "PostgreSQL", level: 60, description: "Advanced SQL Database" },
+        { name: "MySQL", level: 75 },
+        { name: "Firebase", level: 70 },
       ],
     },
     {
       title: "Tools & Technologies",
-      icon: Wrench,
+      icon: <Wrench className="h-6 w-6" />,
       skills: [
-        { name: "Git", level: 85, description: "Version Control" },
-        { name: "GitHub", level: 90, description: "Code Repository" },
-        { name: "Linux", level: 75, description: "Operating System" },
-        { name: "VS Code", level: 95, description: "Code Editor" },
-      ],
-    },
-    {
-      title: "System Programming",
-      icon: Cpu,
-      skills: [
-        { name: "Operating Systems", level: 70, description: "OS Concepts & Implementation" },
-        { name: "Data Structures", level: 85, description: "Algorithms & Problem Solving" },
-        { name: "Computer Networks", level: 65, description: "Network Programming" },
-        { name: "System Design", level: 60, description: "Architecture & Scalability" },
+        { name: "Git", level: 80 },
+        { name: "Visual Studio Code", level: 90 },
+        { name: "Android Studio", level: 75 },
+        { name: "AI Tools", level: 70 },
       ],
     },
   ]
 
-  const certifications = [
-    "Python for Data Science - Coursera",
-    "Machine Learning Fundamentals",
-    "Web Development Bootcamp",
+  const coreCompetencies = [
     "Data Structures & Algorithms",
+    "Machine Learning",
+    "Web Development",
+    "Android Development",
+    "Problem Solving",
+    "Software Engineering",
+    "UI/UX Design",
+    "Version Control",
   ]
 
   return (
-    <div className="min-h-screen py-20">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900 py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Skills &{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              Expertise
-            </span>
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            My{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">Skills</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            A comprehensive overview of my technical skills, tools, and technologies I work with
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+            A comprehensive overview of my technical skills and competencies in software development
           </p>
         </div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           {skillCategories.map((category, index) => (
             <Card
               key={index}
-              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700 hover:shadow-lg transition-shadow"
+              className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700"
             >
               <CardHeader>
-                <CardTitle className="flex items-center gap-3 text-gray-900 dark:text-white">
-                  <category.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
+                <CardTitle className="flex items-center text-gray-900 dark:text-white">
+                  <div className="text-blue-600 dark:text-blue-400 mr-3">{category.icon}</div>
                   {category.title}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="font-medium text-gray-900 dark:text-white">{skill.name}</span>
-                        <span className="text-sm text-gray-600 dark:text-gray-400">{skill.level}%</span>
+                    <div key={skillIndex}>
+                      <div className="flex justify-between items-center mb-2">
+                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{skill.name}</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{skill.level}%</span>
                       </div>
                       <Progress value={skill.level} className="h-2" />
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{skill.description}</p>
                     </div>
                   ))}
                 </div>
@@ -120,52 +100,25 @@ export default function SkillsPage() {
           ))}
         </div>
 
-        {/* Certifications & Learning */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700">
-            <CardHeader>
-              <CardTitle className="text-gray-900 dark:text-white">Certifications & Courses</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {certifications.map((cert, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
-                    <span className="text-gray-700 dark:text-gray-300">{cert}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700">
-            <CardHeader>
-              <CardTitle className="text-gray-900 dark:text-white">Currently Learning</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="border-green-500 text-green-700 dark:text-green-400">
-                    Advanced React Patterns
-                  </Badge>
-                  <Badge variant="outline" className="border-green-500 text-green-700 dark:text-green-400">
-                    Docker & Kubernetes
-                  </Badge>
-                  <Badge variant="outline" className="border-green-500 text-green-700 dark:text-green-400">
-                    System Design
-                  </Badge>
-                  <Badge variant="outline" className="border-green-500 text-green-700 dark:text-green-400">
-                    Cloud Computing (AWS)
-                  </Badge>
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-4">
-                  I'm constantly expanding my skill set and staying up-to-date with the latest technologies and industry
-                  trends.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Core Competencies */}
+        <Card className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border-gray-200 dark:border-gray-700">
+          <CardHeader>
+            <CardTitle className="text-center text-gray-900 dark:text-white">Core Competencies</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap justify-center gap-3">
+              {coreCompetencies.map((competency, index) => (
+                <Badge
+                  key={index}
+                  variant="secondary"
+                  className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900 dark:to-purple-900 text-blue-800 dark:text-blue-200 px-4 py-2 text-sm"
+                >
+                  {competency}
+                </Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   )
