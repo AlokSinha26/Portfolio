@@ -1,9 +1,9 @@
 "use client"
 
 import type React from "react"
-
-import { useState, useEffect, useRef, Suspense, lazy } from "react"
-import { Mail, Linkedin, Github, Menu, X, Send } from "lucide-react"
+import Link from "next/link"
+import { useState, useEffect, useRef, lazy } from "react"
+import { Mail, Linkedin, Github, Menu, X, Send, ArrowRight, Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -141,8 +141,9 @@ export default function Portfolio() {
 
   const typingText = useTypingAnimation([
     "Aspiring Software Developer",
-    "Machine Learning Enthusiast",
-    "C/C++ Programmer",
+    "Computer Engineering Student",
+    "Problem Solver & Innovator",
+    "Tech Enthusiast",
   ])
 
   const scrollToSection = (sectionId: string) => {
@@ -226,7 +227,7 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900 text-gray-900 dark:text-white">
       {/* Sticky Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -278,30 +279,115 @@ export default function Portfolio() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="relative h-screen flex items-center justify-center overflow-hidden">
-        {/* 3D Background with Lazy Loading */}
-        <div className="absolute inset-0 opacity-20">
-          <Suspense fallback={<CanvasLoader />}>
-            <Canvas3D />
-          </Suspense>
-        </div>
+      <section id="hero" className="relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Content */}
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white">
+                  Hi, I'm{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                    Alok Sinha
+                  </span>
+                </h1>
+                <div className="h-16 flex items-center">
+                  <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300">
+                    {typingText}
+                    <span className="animate-pulse">|</span>
+                  </p>
+                </div>
+                <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl">
+                  Computer Engineering student at Thapar Institute, passionate about Data Structures & Algorithms,
+                  Machine Learning, and Web Development. Ready to solve real-world problems with innovative technology
+                  solutions.
+                </p>
+              </div>
 
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-4 animate-fade-in">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            Alok Sinha
-          </h1>
-          <div className="text-xl md:text-2xl text-gray-300 mb-8 h-8">
-            <span className="border-r-2 border-blue-400 pr-1 animate-pulse">{typingText}</span>
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                >
+                  
+                </Button>
+                <Button
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="border-gray-300 dark:border-gray-600 bg-transparent"
+                >
+                  <Link href="/resume">
+                    <Download className="mr-2 h-4 w-4" />
+                    Download Resume
+                  </Link>
+                </Button>
+              </div>
+
+              {/* Quick Links */}
+              <div className="flex space-x-6">
+                <a
+                  href="mailto:sinhalok26@gmail.com"
+                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <Mail className="h-6 w-6" />
+                </a>
+                <a
+                  href="https://github.com/AlokSinha26"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <Github className="h-6 w-6" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/sinhalok7"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  <Linkedin className="h-6 w-6" />
+                </a>
+              </div>
+            </div>
+
+            {/* Profile Image */}
+            <div className="relative">
+              <div className="relative w-80 h-80 mx-auto">
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full blur-2xl opacity-30 animate-pulse"></div>
+                <img
+                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/upscalemedia-transformed-54mA5BOJaTgJL51BCII9oc1FOdI4kq.jpeg"
+                  alt="Alok Sinha"
+                  className="relative w-full h-full object-cover rounded-full border-4 border-white dark:border-gray-800 shadow-2xl"
+                />
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              onClick={() => scrollToSection("contact")}
-              variant="outline"
-              className="border-blue-400 text-blue-400 hover:bg-blue-400 hover:text-white px-8 py-3 rounded-full transition-all transform hover:scale-105"
-            >
-              Contact Me
-            </Button>
+        </div>
+      </section>
+
+      {/* Quick Stats */}
+      <section className="py-16 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">5+</div>
+              <div className="text-gray-600 dark:text-gray-400">Projects</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">3+</div>
+              <div className="text-gray-600 dark:text-gray-400">Languages</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">2026</div>
+              <div className="text-gray-600 dark:text-gray-400">Graduate</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">100%</div>
+              <div className="text-gray-600 dark:text-gray-400">Dedicated</div>
+            </div>
           </div>
         </div>
       </section>
