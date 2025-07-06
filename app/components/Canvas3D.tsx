@@ -1,39 +1,28 @@
 "use client"
 
-import { useRef, useEffect } from "react"
 import { Canvas } from "@react-three/fiber"
-import { OrbitControls } from "@react-three/drei"
+import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei"
+import { Suspense } from "react"
 
-// 3D Rotating Cube Component
-function AnimatedCube() {
-  const meshRef = useRef<any>()
-
-  useEffect(() => {
-    const animate = () => {
-      if (meshRef.current) {
-        meshRef.current.rotation.x += 0.01
-        meshRef.current.rotation.y += 0.01
-      }
-      requestAnimationFrame(animate)
-    }
-    animate()
-  }, [])
-
+function AnimatedSphere() {
   return (
-    <mesh ref={meshRef}>
-      <boxGeometry args={[2, 2, 2]} />
-      <meshStandardMaterial color="#3b82f6" wireframe />
-    </mesh>
+    <Sphere visible args={[1, 100, 200]} scale={2}>
+      <MeshDistortMaterial color="#3b82f6" attach="material" distort={0.3} speed={1.5} roughness={0} />
+    </Sphere>
   )
 }
 
-export default function Canvas3D() {
+export function Canvas3D() {
   return (
-    <Canvas camera={{ position: [0, 0, 5] }}>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[10, 10, 10]} />
-      <AnimatedCube />
-      <OrbitControls enableZoom={false} enablePan={false} />
+    <Canvas camera={{ position: [0, 0, 5] }} style={{ height: "100vh", width: "100%" }}>
+      <Suspense fallback={null}>
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[10, 10, 5]} intensity={1} />
+        <AnimatedSphere />
+        <OrbitControls enableZoom={false} enablePan={false} />
+      </Suspense>
     </Canvas>
   )
 }
+
+export default Canvas3D
