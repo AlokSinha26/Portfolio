@@ -1,123 +1,83 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui/button"
+import { Menu, X } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { Menu, Code, User, Briefcase, FileText, Mail, Wrench } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import ThemeToggle from "@/components/theme-toggle"
 import { cn } from "@/lib/utils"
+import { useState } from "react"
 
-const navigation = [
-  { name: "Home", href: "/", icon: Code },
-  { name: "About", href: "/about", icon: User },
-  { name: "Skills", href: "/skills", icon: Wrench },
-  { name: "Projects", href: "/projects", icon: Briefcase },
-  { name: "Resume", href: "/resume", icon: FileText },
-  { name: "Contact", href: "/contact", icon: Mail },
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/skills", label: "Skills" },
+  { href: "/projects", label: "Projects" },
+  { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
 ]
 
-export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false)
+function NavLinks({ orientation = "horizontal" }: { orientation?: "horizontal" | "vertical" }) {
   const pathname = usePathname()
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4">
-        {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-purple-600 to-blue-600">
-            <Code className="h-4 w-4 text-white" />
-          </div>
-          <span className="font-bold text-lg bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Alok Sinha
-          </span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-1">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href
-            return (
-              <Button
-                key={item.name}
-                variant={isActive ? "secondary" : "ghost"}
-                size="sm"
-                asChild
-                className={cn(
-                  "transition-colors",
-                  isActive && "bg-purple-500/20 text-purple-400 hover:bg-purple-500/30",
-                )}
-              >
-                <Link href={item.href} className="flex items-center gap-2">
-                  <item.icon className="h-4 w-4" />
-                  {item.name}
-                </Link>
-              </Button>
-            )
-          })}
-        </div>
-
-        {/* Theme Toggle & Mobile Menu */}
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-
-          {/* Mobile Menu */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-5 w-5" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-80">
-              <div className="flex flex-col h-full">
-                <div className="flex items-center justify-between py-4">
-                  <Link href="/" className="flex items-center space-x-2" onClick={() => setIsOpen(false)}>
-                    <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-purple-600 to-blue-600">
-                      <Code className="h-4 w-4 text-white" />
-                    </div>
-                    <span className="font-bold text-lg bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
-                      Alok Sinha
-                    </span>
-                  </Link>
-                </div>
-
-                <div className="flex flex-col space-y-2 mt-8">
-                  {navigation.map((item) => {
-                    const isActive = pathname === item.href
-                    return (
-                      <Button
-                        key={item.name}
-                        variant={isActive ? "secondary" : "ghost"}
-                        size="lg"
-                        asChild
-                        className={cn(
-                          "justify-start transition-colors",
-                          isActive && "bg-purple-500/20 text-purple-400 hover:bg-purple-500/30",
-                        )}
-                        onClick={() => setIsOpen(false)}
-                      >
-                        <Link href={item.href} className="flex items-center gap-3">
-                          <item.icon className="h-5 w-5" />
-                          {item.name}
-                        </Link>
-                      </Button>
-                    )
-                  })}
-                </div>
-
-                <div className="mt-auto pt-8 border-t">
-                  <p className="text-sm text-muted-foreground text-center">Building things with code & curiosity</p>
-                </div>
-              </div>
-            </SheetContent>
-          </Sheet>
-        </div>
-      </div>
-    </nav>
+    <ul className={cn(orientation === "horizontal" ? "hidden md:flex items-center gap-6" : "flex flex-col gap-4 mt-6")}>
+      {links.map(({ href, label }) => {
+        const active = pathname === href
+        return (
+          <li key={href}>
+            <Link
+              href={href}
+              className={cn(
+                "transition-colors hover:text-purple-600 dark:hover:text-purple-400",
+                active ? "text-purple-600 dark:text-purple-400 font-semibold" : "text-zinc-700 dark:text-zinc-300",
+              )}
+            >
+              {label}
+            </Link>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
 
+export function Navbar() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <header className="sticky top-0 z-40 w-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur border-b border-zinc-200 dark:border-zinc-800">
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:py-4">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-2 text-lg font-bold">
+          <span className="rounded bg-gradient-to-r from-purple-600 to-indigo-600 px-2 py-1 text-white">AS</span>
+          <span className="sr-only">Alok Sinha</span>
+        </Link>
+
+        {/* Desktop links */}
+        <NavLinks orientation="horizontal" />
+
+        {/* Right actions */}
+        <div className="flex items-center gap-3">
+          <ThemeToggle />
+          {/* Mobile menu button */}
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="md:hidden">
+                {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                <span className="sr-only">Toggle menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-64">
+              <NavLinks orientation="vertical" />
+            </SheetContent>
+          </Sheet>
+        </div>
+      </nav>
+    </header>
+  )
+}
+
+/* default export for backward-compat */
 export default Navbar
